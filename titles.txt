@@ -1,0 +1,227 @@
+A practical guide to multi-objective reinforcement learning and planning
+Online joint bid/daily budget optimization of Internet advertising campaigns
+Reward-Free Policy Space Compression for Reinforcement Learning
+Finite Sample Analysis of Mean-Volatility Actor-Critic for Risk-Averse Reinforcement Learning
+Challenging Common Assumptions in Convex Reinforcement Learning
+The Importance of Non-Markovianity in Maximum State Entropy Exploration
+Provably Efficient Causal Model-Based Reinforcement Learning for Systematic
+Generalization
+Reward-Free Policy Space Compression for Reinforcement Learning
+Delayed Reinforcement Learning by Imitation
+ARLO: A Framework for Automated Reinforcement Learning
+Safe Policy Iteration: A Monotonically Improving Approximate Policy
+Iteration Approach
+MushroomRL: Simplifying Reinforcement Learning Research
+Gaussian Approximation for Bias Reduction in Q-Learning
+Dealing with multiple experts and non-stationarity in inverse reinforcement learning: an application to real-life problems
+Policy Optimization as Online Learning with Mediator Feedback
+Task-Agnostic Exploration via Policy Gradient of a Non-Parametric
+State Entropy Estimate
+Newton Optimization on Helmholtz Decomposition for Continuous Games
+Monte carlo tree search for trading and hedging
+Learning FX trading strategies with FQI and persistent actions
+Provably Efficient Learning of Transferable Rewards
+Leveraging Good Representations in Linear Contextual Bandits
+Meta-Reinforcement Learning by Tracking Task Non-stationarity
+Learning a Belief Representation for Delayed Reinforcement Learning
+Subgaussian and Differentiable Importance Sampling for Off-Policy
+Evaluation and Learning
+Reinforcement Learning in Linear MDPs: Constant Regret and Representation
+Selection
+Learning in Non-Cooperative Configurable Markov Decision Processes
+Conservative Online Convex Optimization
+Exploiting History Data for Nonstationary Multi-armed Bandit
+Time-variant variational transfer for value functions
+A Practical Guide to Multi-Objective Reinforcement Learning and Planning
+Leveraging Good Representations in Linear Contextual Bandits
+Meta-Reinforcement Learning by Tracking Task Non-stationarity
+Reinforcement Learning in Linear MDPs: Constant Regret and Representation
+Selection
+Lifelong Hyper-Policy Optimization with Multiple Importance Sampling
+Regularization
+Unsupervised Reinforcement Learning in Multiple Environments
+On the use of the policy gradient and Hessian in inverse reinforcement
+learning
+Sliding-Window Thompson Sampling for Non-Stationary Settings
+Importance Sampling Techniques for Policy Optimization
+Combining reinforcement learning with rule-based controllers for transparent
+and general decision-making in autonomous driving
+Gradient-Aware Model-Based Policy Search
+An Intrinsically-Motivated Approach for Learning Highly Exploring
+and Fast Mixing Policies
+Balancing Learning Speed and Stability in Policy Gradient via Adaptive
+Exploration
+Truly Batch Model-Free Inverse Reinforcement Learning about Multiple
+Intentions
+A Novel Confidence-Based Algorithm for Structured Bandits
+Driving Exploration by Maximum Distribution in Gaussian Process Bandits
+Model-Free Non-Stationarity Detection and Adaptation in Reinforcement
+Learning
+Fast direct calibration of interest rate derivatives pricing models
+Dealing with transaction costs in portfolio optimization: online gradient
+descent with momentum
+Foreign exchange trading: a risk-averse batch reinforcement learning
+approach
+Option hedging with risk averse reinforcement learning
+Sharing Knowledge in Multi-Task Deep Reinforcement Learning
+Control Frequency Adaptation via Action Persistence in Batch Reinforcement
+Learning
+Sequential Transfer in Reinforcement Learning with a Generative Model
+Inferring Functional Properties from Fluid Dynamics Features
+Risk-Averse Trust Region Optimization for Reward-Volatility Reduction
+Inverse Reinforcement Learning from a Gradient-based Learner
+An Asymptotically Optimal Primal-Dual Incremental Algorithm for Contextual
+Linear Bandits
+MushroomRL: Simplifying Reinforcement Learning Research
+Control Frequency Adaptation via Action Persistence in Batch Reinforcement
+Learning
+Online Joint Bid/Daily Budget Optimization of Internet Advertising
+Campaigns
+A Novel Confidence-Based Algorithm for Structured Bandits
+Time-Variant Variational Transfer for Value Functions
+Sequential Transfer in Reinforcement Learning with a Generative Model
+A Policy Gradient Method for Task-Agnostic Exploration
+Newton-based Policy Optimization for Games
+Inverse Reinforcement Learning from a Gradient-based Learner
+Option Hedging with Risk Averse Reinforcement Learning
+An Asymptotically Optimal Primal-Dual Incremental Algorithm for Contextual
+Linear Bandits
+Policy Optimization as Online Learning with Mediator Feedback
+Reinforcement Learning in Configurable Continuous Environments
+Optimistic Policy Optimization via Multiple Importance Sampling
+Transfer of Samples in Policy Search via Multiple Importance Sampling
+Feature Selection via Mutual Information: New Theoretical Insights
+Exploiting Action-Value Uncertainty to Drive Exploration in Reinforcement
+Learning
+Exploration Driven by an Optimistic Bellman Equation
+Propagating Uncertainty in Reinforcement Learning via Wasserstein
+Barycenters
+Dealing with Interdependencies and Uncertainty in Multi-Channel Advertising
+Campaigns Optimization
+Smoothing Policies and Safe Policy Gradients
+An Intrinsically-Motivated Approach for Learning Highly Exploring
+and Fast Mixing Policies
+Feature Selection via Mutual Information: New Theoretical Insights
+Policy Space Identification in Configurable Environments
+Gradient-Aware Model-based Policy Search
+Risk-Averse Trust Region Optimization for Reward-Volatility Reduction
+Improving multi-armed bandit algorithms in online pricing settings
+A Combinatorial-Bandit Algorithm for the Online Joint Bid/Budget Optimization
+of Pay-per-Click Advertising Campaigns
+Configurable Markov Decision Processes
+Stochastic Variance-Reduced Policy Gradient
+Importance Weighted Transfer of Samples in Reinforcement Learning
+Targeting Optimization for Internet Advertising by Learning from Logged
+Bandit Feedback
+Does Reinforcement Learning outperform PID in the control of FES-induced
+elbow flex-extension?
+Policy Optimization via Importance Sampling
+Transfer of Value Functions via Variational Methods
+Importance Weighted Transfer of Samples in Reinforcement Learning
+Configurable Markov Decision Processes
+Stochastic Variance-Reduced Policy Gradient
+Policy Optimization via Importance Sampling
+Estimating the Maximum Expected Value in Continuous Reinforcement
+Learning Problems
+Unimodal Thompson Sampling for Graph-Structured Arms
+Designing Learning Algorithms over the Sequence Form of an Extensive-Form
+Game
+Boosted Fitted Q-Iteration
+Risk-averse trees for learning from logged bandit feedback
+User context estimation for public travel assistance and intelligent
+service scheduling
+Compatible Reward Inverse Reinforcement Learning
+Adaptive Batch Size for Safe Policy Gradients
+Exploiting structure and uncertainty of Bellman updates in Markov
+decision processes
+Gradient-based minimization for multi-expert Inverse Reinforcement
+Learning
+Regret Minimization Algorithms for the Followers Behaviour Identification
+in Leadership Games
+Cost-Sensitive Approach to Batch Size Adaptation for Gradient Descent
+Extensive-form games with heterogeneous populations: solution concepts,
+equilibria characterization, learning dynamics
+Multi-objective Reinforcement Learning through Continuous Pareto Manifold
+Approximation
+Policy Search for the Optimal Control of Markov Decision Processes: A Novel Particle-Based Iterative Scheme
+Sequence-Form and Evolutionary Dynamics: Realization Equivalence to Agent Form and Logit Dynamics
+Inverse Reinforcement Learning through Policy Gradient Minimization
+Budgeted Multi-Armed Bandit in Continuous Action Space
+Estimating Maximum Expected Value through Gaussian Approximation
+Reconstruction of public transport state
+Unimodal Thompson Sampling for Graph-Structured Arms
+Sparse multi-task reinforcement learning
+Policy gradient in Lipschitz Markov Decision Processes
+Multi-Objective Reinforcement Learning with Continuous Pareto Frontier
+Approximation
+Estimating a Mean-Path from a set of 2-D curves
+Following Newton direction in Policy Gradient with parameter exploration
+Evolutionary Dynamics of Q-Learning over the Sequence Form
+Policy gradient approaches for multi-objective sequential decision making: A comparison
+Policy gradient approaches for multi-objective sequential decision
+making
+Sparse Multi-Task Reinforcement Learning
+Multi-objective Reinforcement Learning with Continuous Pareto Frontier
+Approximation
+Efficient Evolutionary Dynamics with Extensive-Form Games
+Extensive-form games with heterogeneous populations
+Safe Policy Iteration
+Adaptive Step-Size for Policy Gradient Methods
+Efficient evolutionary dynamics with extensive-form games
+Data-driven dynamic emulation modelling for the optimal management
+of environmental systems
+Computing Equilibria with Two-Player Zero-Sum Continuous Stochastic
+Games with Switching Controller
+Tree-based Fitted Q-iteration for Multi-Objective Markov Decision
+problems
+Tree-based variable selection for dimensionality reduction of large-scale
+control systems
+Fitted policy search
+Equilibrium approximation in simulation-based extensive-form games
+Multi-objective fitted Q-iteration: Pareto frontier approximation
+in one single run
+Transfer from Multiple MDPs
+Transfer from Multiple MDPs
+Reinforcement distribution in fuzzy Q-learning
+Batch Reinforcement Learning for semi-active suspension control
+Batch Reinforcement Learning - An Application to a Controllable Semi-active
+Suspension System
+Towards Automated Bargaining in Electronic Markets: A Partially
+Two-Sided Competition Model
+Transfer of task representation in reinforcement learning using policy-based
+proto-value functions
+On the usefulness of opponent modeling: the Kuhn Poker case study
+Transfer of samples in batch reinforcement learning
+Batch Reinforcement Learning for Controlling a Mobile Wheeled Pendulum
+Robot
+Improving Batch Reinforcement Learning Performance through Transfer
+of Samples
+Learning Fuzzy Classifier Systems: Architecture and Exploration Issues
+Problems and solutions for anchoring in multi-robot applications
+Bifurcation Analysis of Reinforcement Learning Agents in the Selten's
+Horse Game
+Reinforcement Learning in Complex Environments Through Multiple Adaptive
+Partitions
+Piecewise constant reinforcement learning for robotic applications
+Reinforcement Learning in Continuous Action Spaces through Sequential
+Monte Carlo Methods
+Concepts and fuzzy models for behavior-based robotics
+Learning to cooperate in multi-agent social dilemmas
+Incremental Skill Acquisition for Self-motivated Learning Animats
+{MRT:} Robotics Off-the-Shelf with the Modular Robotic Toolkit
+Automatic Error Detection and Reduction for an Odometric Sensor based
+on Two Optical Mice
+Reinforcement Distribution in Continuous State Action Space Fuzzy
+Q-Learning: {A} Novel Approach
+Dead Reckoning for Mobile Robots Using Two Optical Mice
+A kinematic-independent dead-reckoning sensor for indoor mobile robotics
+Filling the Gap among Coordination, Planning, and Reaction Using a
+Fuzzy Cognitive Model
+A Probabilistic Framework for Weighting Different Sensor Data in {MUREA}
+Concepts and Fuzzy Models for Behavior-Based Robotics
+An architecture to implement agents co-operating in dynamic environments
+A robot localization method based on evidence accumulation and multi-resolution
+MUREA: A MUlti-Resolution Evidence Accumulation Method for Robot
+Localization in Known Environments
+Concepts for Anchoring in Robotics
+A Framework for Robust Sensing in Multi-agent Systems
