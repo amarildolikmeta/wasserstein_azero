@@ -239,6 +239,7 @@ def argument_parser():
         type=str,
         default="",
         help="last directory of logs")
+
     return CLI
 
 

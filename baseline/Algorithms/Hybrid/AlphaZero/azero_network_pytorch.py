@@ -164,12 +164,12 @@ class AzeroBrain(nn.Module):
         Returns:
 
         """
-        sizes = [16]
-        value_sizes = [16]
-        policy_sizes = [16]
-        # sizes = [self.num_hidden] * (self.num_layers - 1)
-        # value_sizes = [self.num_hidden]
-        # policy_sizes = [self.num_hidden]
+        # sizes = [20]
+        # value_sizes = [4]
+        # policy_sizes = [10]
+        sizes = [self.num_hidden] * (self.num_layers - 1)
+        value_sizes = [self.num_hidden]
+        policy_sizes = [self.num_hidden]
         self.activation = self.relu
         return self.compile(common_sizes=sizes, policy_sizes=policy_sizes, value_sizes=value_sizes)
 
@@ -231,7 +231,7 @@ class AzeroBrain(nn.Module):
         """
         x = np.asarray([s[0] for s in data])  # state
         y1 = np.asarray([s[1] for s in data])  # probability
-        y2 = np.asarray([s[2] for s in data])  # value
+        y2 = np.asarray([s[3] for s in data])  # value
         return self.fit(x, y1, y2, epochs, batch_size, stopping, verbose=verbose)
 
     def fit(self, states, policies, values, epochs, batch_size, stopping, verbose=0):

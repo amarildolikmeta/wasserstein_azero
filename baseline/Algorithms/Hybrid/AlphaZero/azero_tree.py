@@ -51,71 +51,28 @@ class AzeroTree:
         self.brain = None
 
     def reset_env(self):
-        """
-
-        Returns:
-
-        """
         self.env.reset()
-        # self.env.seed(np.random.randint(100000))
+        #self.env.seed(np.random.randint(100000))
         self.root = AzeroNode(None, None, S=self.env.get_S(), is_single_player=self.args["single_player"])
 
     def reset(self):
-        """
-
-        Returns:
-
-        """
         self.reset_env()
         self.probabilities = None
 
     def set_env(self, env):
-        """
-
-        Args:
-            env:
-
-        Returns:
-
-        """
         self.env = env
         self.root = AzeroNode(None, None, S=self.env.get_S(), is_single_player=self.args["single_player"])
 
     def set_brain(self, brain):
-        """
-
-        Args:
-            brain:
-
-        Returns:
-
-        """
         self.brain = brain
 
     def set_brain_weights(self, weights):
-        """
-
-        Args:
-            weights:
-
-        Returns:
-
-        """
         if self.brain is None:
             self.brain = self.brain_producer(self.args["obs_dim"], self.args["act_dim"],
                                              **self.args["brain_params"])
         self.brain.set_weights(weights.copy())
 
     def set_new_root(self, action, new_root_state):
-        """
-
-        Args:
-            action:
-            new_root_state: the new state of the new root
-
-        Returns:
-
-        """
 
         try:
             # if state was not explored yet
@@ -131,14 +88,6 @@ class AzeroTree:
             self.root.S = new_root_state
 
     def traverse(self, node):
-        """
-
-        Args:
-            node: the starting node
-
-        Returns: first non explored node
-
-        """
 
         while len(node.children) != 0:
             node = self.best_uct(node)
@@ -146,14 +95,6 @@ class AzeroTree:
         return node
 
     def best_uct(self, node):
-        """
-
-        Args:
-            node:
-
-        Returns:
-
-        """
         UTCs = [(child.Q + self.c_utc * node.P[i] * sqrt(node.N) / (child.N + 1), i) for i, child in
                 enumerate(node.children)]
         UTCs.sort(key=lambda x: x[0], reverse=True)
@@ -183,14 +124,6 @@ class AzeroTree:
         return None
 
     def expand(self, node):
-        """
-
-        Args:
-            node:
-
-        Returns:
-
-        """
         self.env.set_S(node)
 
         is_valids = [self.env.is_valid_action(action) for action in range(self.env.n_actions)]
@@ -232,12 +165,6 @@ class AzeroTree:
             child.Q = child.r + self.gamma * child.v
 
     def backpropagate(self, node):
-        """
-        Args:
-            node:
-
-        Returns:
-        """
         result = node.v
         ret = result if not node.is_terminal else 0
         while node.parent is not None:
@@ -360,12 +287,6 @@ class AzeroTree:
         """
         pitting: Add dirichlet noise
         train: Add dirichlet noise + noisy probabilities
-        Args:
-            depth:
-            mode:
-
-        Returns:
-
         """
 
         if len(self.root.children) == 0:
