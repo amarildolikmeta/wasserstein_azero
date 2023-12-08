@@ -245,6 +245,8 @@ def argument_parser():
 
 def create_dir(args):
     # Create path dir if not exists
+    args["path_results"] += "bitflip/bits_" + str(args["bit_depth"]) + "/"
+
     if args["optimistic"]:
         args["path_results"] += "wasserstein/"
     else:
