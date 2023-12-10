@@ -444,8 +444,8 @@ class SaveInfo:
         # Print stuff
 
         if self.n_calls % self.check_freq == 0 and self.n_calls != 0:
-            self.print_to_file(self.infos, "{}info.txt".format(self.save_path))
-            self.print_to_file(self.model.history, "{}history.txt".format(self.save_path))
+            self.print_as_csv(self.infos, "{}info.csv".format(self.save_path))
+            self.print_as_csv(self.model.history, "{}history.csv".format(self.save_path))
             self.print_as_csv(self.infos, "{}monitor.csv".format(self.save_path))
         self.n_calls += 1
 

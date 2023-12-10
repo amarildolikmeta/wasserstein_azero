@@ -120,5 +120,6 @@ def main():
     print_moving_averages(list_of_means, list_of_stds, N, "solved", path_, N=window_width, freq=args['freq'],
                           labels=labels, min_len=min_len)
     print_moving_averages(list_of_means, list_of_stds, N, "return", path_, N=window_width, freq=args['freq'],
+                          labels=labels, min_len=min_len)
 
 if __name__ == '__main__': main()
