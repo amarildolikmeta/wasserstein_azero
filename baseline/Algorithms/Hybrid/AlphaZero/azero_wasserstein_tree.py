@@ -102,23 +102,36 @@ class AzeroWassersteinTree(AzeroTree):
         ret = result if not node.is_terminal else (0, 0)
         while node.parent is not None:
             if self.backpropagation != "mc":
-                if self.backpropagation == "optimistic":
-                    values = node.Qs + self.standard_bound * node.sigmas
-                elif self.backpropagation == "mean":
-                    values = node.Qs
-                elif self.backpropagation == "posterior":
-                    values = np.random.normal(loc=node.Qs, scale=node.sigmas)
+                if self.backpropagation == "wass":
+                    if len(node.children) > 0:
+                        counts = np.array([child.N for child in node.children])
+                        counts = counts / np.sum(counts)
+                        q = np.sum(node.Qs * counts)
+                        sigma = np.sum(node.sigmas * counts)
+                        result = (q, sigma)
+                        ret = result if not node.is_solved else (0, 0)
                 else:
-                    raise ValueError("Backpropagation not implemented")
-                best_arm = my_argmax(values)
-                result = (node.Qs[best_arm], node.sigmas[best_arm])
-                ret = result if not node.is_solved else (0, 0)
+                    if self.backpropagation == "optimistic":
+                        values = node.Qs + self.standard_bound * node.sigmas
+                    elif self.backpropagation == "mean":
+                        values = node.Qs
+                    elif self.backpropagation == "posterior":
+                        values = np.random.normal(loc=node.Qs, scale=node.sigmas)
+                    else:
+                        raise ValueError("Backpropagation not implemented")
+                    best_arm = my_argmax(values)
+                    result = (node.Qs[best_arm], node.sigmas[best_arm])
+                    ret = result if not node.is_solved else (0, 0)
             ret = (node.r + self.gamma * ret[0], self.gamma * ret[1])
             node.N += 1
             node.W += ret[0]
             node.sum_sig += ret[1]
-            node.parent.Qs[node.action] = node.W / node.N
-            node.parent.sigmas[node.action] = node.sum_sig / node.N
+            if self.backpropagation == "wass":
+                node.parent.Qs[node.action] = ret[0]
+                node.parent.sigmas[node.action] = ret[1]
+            else:
+                node.parent.Qs[node.action] = node.W / node.N
+                node.parent.sigmas[node.action] = node.sum_sig / node.N
             node = node.parent
         # this is root
         node.N += 1

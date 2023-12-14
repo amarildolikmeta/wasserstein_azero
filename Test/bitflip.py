@@ -224,7 +224,7 @@ def argument_parser():
     CLI.add_argument(
         "--backpropagation",
         type=str,
-        choices=["mc", "optimistic", "mean"],
+        choices=["mc", "optimistic", "mean", "wass"],
         default="mc",
         help="target policy during tree updates")
     CLI.add_argument(
