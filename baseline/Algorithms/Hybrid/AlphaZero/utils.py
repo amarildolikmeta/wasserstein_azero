@@ -247,6 +247,7 @@ def run_episodes(mcts_maker, env_maker, weights, n_episodes=1, tree=None, HER_pr
     optimistic = training_tree.args["optimistic"]
     mc_targets = training_tree.args["mc_targets"]
     search_params = training_tree.args["search_params"]
+    tree_samples_ratio = training_tree.args["tree_samples_ratio"]
     HER_type = training_tree.args["HER"]
     if HER_type != "None":
         if np.random.rand() > HER_prob:
@@ -280,6 +281,13 @@ def run_episodes(mcts_maker, env_maker, weights, n_episodes=1, tree=None, HER_pr
                 else:
                     for k, q in enumerate(qs):
                         experiences.append((S, k, q, sigmas[k]))
+                    if tree_samples_ratio > 0:
+                        nodes = training_tree.bfs(max=tree_samples_ratio)
+                        for node in nodes:
+                            qs = node.Qs
+                            sigmas = node.sigmas
+                            for k, q in enumerate(qs):
+                                    experiences.append((node.S["nn_input"], k, q, sigmas[k]))
             else:
                 experiences.append((S, P, action))
             ep_rewards.append(reward)

@@ -205,6 +205,11 @@ def argument_parser():
         default=True,
         help="run wasserstein azero")
     CLI.add_argument(
+        "--tree_samples_ratio",
+        type=int,
+        default=0.,
+        help="Fraction of samples from the tree")
+    CLI.add_argument(
         "--action_selection",
         type=str,
         choices=["optimistic", "mean", "counts"],
@@ -234,6 +239,7 @@ def argument_parser():
         choices=[True, False],
         default=True,
         help="run wasserstein azero")
+
     CLI.add_argument(
         "--suffix",
         type=str,

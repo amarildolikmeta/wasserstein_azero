@@ -84,10 +84,9 @@ class AzeroWassersteinTree(AzeroTree):
             # Mask non-solved children
             if any_solved_state and not child.is_solved:
                 child.is_masked = True
-
             child.Qs = q
             child.sigmas = sigma
-            if child.is_terminal:
+            if child.is_solved:
                 child.Qs *= 0
                 child.sigmas *= 0
 
@@ -113,7 +112,7 @@ class AzeroWassersteinTree(AzeroTree):
                     raise ValueError("Backpropagation not implemented")
                 best_arm = my_argmax(values)
                 result = (node.Qs[best_arm], node.sigmas[best_arm])
-                ret = result if not node.is_terminal else (0, 0)
+                ret = result if not node.is_solved else (0, 0)
             ret = (node.r + self.gamma * ret[0], self.gamma * ret[1])
             node.N += 1
             node.W += ret[0]

@@ -1,5 +1,5 @@
 from math import sqrt
-from random import shuffle
+from random import shuffle, sample
 
 #import igraph as ig
 import logging
@@ -211,6 +211,26 @@ class AzeroTree:
         logger.info("pixel {}x{}".format(n_children * graph_depth * N, N * graph_depth))
 
         ig.plot(graph, path, **visual_style)
+
+    def bfs(self, max=np.inf):  # function for BFS
+        visited = []
+        queue = []
+        node = self.root
+        queue.append(node)
+        count = 0
+        while queue and count < max:  # Creating loop to visit each node
+            node = queue.pop(0)
+            if not node.children or len(node.children) == 0:
+                children = []
+            else:
+                children = sample(node.children, len(node.children))
+            for child in children: # no bias wrt action index
+                visited.append(child)
+                queue.append(child)
+                count += 1
+                if count >= max:
+                    break
+        return visited
 
     @staticmethod
     def dfs(visited, graph, node):
