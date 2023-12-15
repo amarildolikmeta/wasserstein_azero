@@ -46,7 +46,7 @@ class AzeroTree:
         self.dirichlet_noise_ratio = args[
             "dirichlet_noise_ratio"]  # new_P = (1-dirichelt_noise_ratio)*P + dirichelt_noise_ratio
         self.n_stochastic_depth = args["n_stochastic_depth"]  # number of step before deterministic action choice
-
+        self.max_depth = 0
         # You can't initialize a brain here, because you need to pickle it later
         self.brain = None
 
@@ -83,6 +83,7 @@ class AzeroTree:
         # and depth?? Check it
 
         self.root = self.root.children[action]
+        self.max_depth = 0
         self.root.parent = None
         if self.root.S is None:
             self.root.S = new_root_state
@@ -167,7 +168,9 @@ class AzeroTree:
     def backpropagate(self, node):
         result = node.v
         ret = result if not node.is_terminal else 0
+        depth = 1
         while node.parent is not None:
+            depth += 1
             ret = node.r + self.gamma * ret  # Il primo nodo non dovrebbe avere ret = reward?
             node.N += 1
             node.W += ret
@@ -177,7 +180,8 @@ class AzeroTree:
         node.N += 1
         node.W += ret
         node.v = node.W / node.N
-
+        if depth > self.max_depth:
+            self.max_depth = depth
     def render(self, path, node=None):
         """
 

@@ -100,7 +100,9 @@ class AzeroWassersteinTree(AzeroTree):
         best_arm = my_argmax(upper_bounds)
         result = (node.Qs[best_arm], node.sigmas[best_arm])
         ret = result if not node.is_terminal else (0, 0)
+        depth = 1
         while node.parent is not None:
+            depth += 1
             if self.backpropagation != "mc":
                 if self.backpropagation == "wass":
                     if len(node.children) > 0:
@@ -139,7 +141,8 @@ class AzeroWassersteinTree(AzeroTree):
         node.sum_sig += ret[1]
         node.v = node.W / node.N
         node.sum_sig = node.sum_sig / node.N
-
+        if depth > self.max_depth:
+            self.max_depth = depth
     def get_probabilities(self, HER_type):
         """
         Used to get P HER
