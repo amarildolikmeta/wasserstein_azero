@@ -3,7 +3,6 @@ import numpy as np
 from os import makedirs
 from os.path import exists
 from random import seed as random_seed
-import torch.multiprocessing
 from numpy.random import seed as np_seed
 from torch import manual_seed
 from torch.multiprocessing import cpu_count
@@ -35,12 +34,6 @@ def strtobool(v):
 
 
 def argument_parser():
-    """
-    parallel --eta -j 1 ipython ::: bitflip.py ::: 20 ::: 40 ::: 40 ::: 0 1 2 3 4 5 6 7 8 9 ::: Naive Posterior ::: 1
-    parallel --eta -j 1 ipython ::: bitflip.py ::: n_bit ::: n_search ::: n_epoch ::: numero_simulazione ::: HER_strategy ::: n_fake_goal
-
-    """
-
     CLI = argparse.ArgumentParser()
 
     CLI.add_argument(
@@ -302,8 +295,6 @@ def fix_randomicity(args):
 
 def main():
     args = initialize_args()
-    # global env_maker
-    # global tree_maker
     def env_maker():
         env = bitFlipping.BitFlip(args["bit_depth"], False, False)
         return env
@@ -365,7 +356,7 @@ def main():
         sampler = ParallelSampler(make_env=env_maker, make_tree=tree_maker,
                                   **sampler_params)
 
-    amcts_model = Azero(env_maker, args, sampler=sampler)
+    amcts_model = Azero(env_maker, args,)
     saveinfo_callback = SaveInfo(check_freq=1, save_path=args["path_results"], verbose=args["verbose"])
     checkpoint_callback = CheckpointModel(check_freq=1, save_path=args["path_results"], verbose=args["verbose"])
     test_model_callback = TestModel(check_freq=args["frequency_test"], save_path=args["path_results"],
