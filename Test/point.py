@@ -41,7 +41,7 @@ def argument_parser():
         "--difficulty",
         type=str,
         default="double_L",
-        choices=["simple", "medium", "hard", "maze", "double_L"],
+        choices=["easy", "medium", "hard", "maze", "double_L"],
         help="configuration of the point environment")
     CLI.add_argument(
         "--depth",
