@@ -99,12 +99,12 @@ def argument_parser():
     CLI.add_argument(
         "--mem_max_capacity",
         type=int,
-        default=200000,
+        default=1000000,
         help="Max memory capacity")
     CLI.add_argument(
         "--horizon",
         type=int,
-        default=150,
+        default=120,
         help="maximum episode length")
     CLI.add_argument(
         "--max_processes",
@@ -119,7 +119,7 @@ def argument_parser():
     CLI.add_argument(
         "--test_size",
         type=int,
-        default=5,
+        default=20,
         help="number of episodes to test")
     CLI.add_argument(
         "--frequency_test",
@@ -130,7 +130,7 @@ def argument_parser():
     CLI.add_argument(
         "--batch_size",
         type=int,
-        default=256,
+        default=512,
         help="training batch size")
     CLI.add_argument(
         "--iterative",
@@ -204,7 +204,7 @@ def argument_parser():
     CLI.add_argument('--prv_std_qty', type=float, default=0.)
     CLI.add_argument('--prv_std_weight', type=float, default=1.)
     CLI.add_argument('--num_layers', type=int, default=2)
-    CLI.add_argument('--num_hidden', type=int, default=256)
+    CLI.add_argument('--num_hidden', type=int, default=64)
     CLI.add_argument('--gamma', type=float, default=0.99)
     CLI.add_argument("--tree_selection", type=str, default="optimistic", choices=["optimistic", "counts", "mean"],
                      help="directory to save results")
