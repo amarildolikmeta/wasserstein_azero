@@ -86,7 +86,7 @@ def argument_parser():
     CLI.add_argument(
         "--init_episodes",
         type=int,
-        default=100,
+        default=0,
         help="episodes used to initially populate replay buffer")
     CLI.add_argument(
         "--retrospective",

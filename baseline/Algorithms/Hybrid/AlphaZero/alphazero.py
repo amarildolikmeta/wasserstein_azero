@@ -145,9 +145,8 @@ class Azero:
 
         for epoch in range(epochs):
             logger.info("Epoch: {}".format(epoch))
-
+            print("Epoch: {}".format(epoch))
             training_epochs = 1
-
             # Simulate games to increase experiences
             t0 = time()
             self.expand_memory()
