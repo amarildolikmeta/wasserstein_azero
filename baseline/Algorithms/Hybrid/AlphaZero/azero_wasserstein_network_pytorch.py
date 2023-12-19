@@ -49,7 +49,7 @@ def unison_shuffled(a, b, c):
 
 class AzeroWassersteinBrain(nn.Module):
     def __init__(self, input_dim, output_dim, num_layers=2, num_hidden=256, lr=0.005, scope_name="", use_gpu=False,
-                 init_mean=0., init_std=1.,  prv_std_qty=0., prv_std_weight=1.):
+                 init_mean=0., init_std=1.,  prv_std_qty=0., prv_std_weight=1., std_lr=0.005):
         self.use_gpu = use_gpu
         cuda = torch.cuda.is_available() and use_gpu
         self.device = torch.device('cuda' if cuda else 'cpu')
@@ -59,6 +59,7 @@ class AzeroWassersteinBrain(nn.Module):
         self.input_dim = input_dim
         self.output_dim = output_dim
         self.lr = lr
+        self.std_lr = std_lr
         self.prv_std_qty = prv_std_qty
         self.prv_std_weight = prv_std_weight
         if scope_name == "":
@@ -103,17 +104,17 @@ class AzeroWassersteinBrain(nn.Module):
                             train_bias=True)
 
         self.old_std = FlattenMlp(input_size=input_dim[0],
-                            output_size=output_dim,
-                            hidden_sizes=hidden_sizes,
-                            bias=init_std,
-                            positive=True,
-                            train_bias=True)
+                                output_size=output_dim,
+                                hidden_sizes=hidden_sizes,
+                                bias=init_std,
+                                positive=True,
+                                train_bias=True)
 
         self.q.to(self.device)
         self.std.to(self.device)
         self.old_std.to(self.device)
         self.q_optimizer = optim.Adam(self.q.parameters(), lr=lr)
-        self.std_optimizer = optim.Adam(self.std.parameters(), lr=lr)
+        self.std_optimizer = optim.Adam(self.std.parameters(), lr=std_lr)
         self.mse = nn.MSELoss()
 
 

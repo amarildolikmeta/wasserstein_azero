@@ -248,7 +248,7 @@ def argument_parser():
         type=strtobool,
         choices=[True, False],
         default=False,
-        help="run wasserstein azero")
+        help="true to place models in gpu")
 
     CLI.add_argument(
         "--suffix",

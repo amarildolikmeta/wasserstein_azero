@@ -73,6 +73,11 @@ def argument_parser():
         default=0.001,
         help="optimizer learning rate")
     CLI.add_argument(
+        "--std_lr",
+        type=float,
+        default=0.005,
+        help="std optimizer learning rate")
+    CLI.add_argument(
         "--network_type",
         type=str,
         default="FC",
@@ -230,9 +235,8 @@ def argument_parser():
         "--use_gpu",
         type=strtobool,
         choices=[True, False],
-        default=True,
-        help="run wasserstein azero")
-
+        default=False,
+        help="true to place models in gpu")
     CLI.add_argument(
         "--suffix",
         type=str,
@@ -318,6 +322,7 @@ def main():
             "init_std": log_std,
             "prv_std_qty": args["prv_std_qty"],
             "prv_std_weight": args["prv_std_weight"],
+            "std_lr": args["std_lr"]
         }
         args["tree_params"] = {
             "backpropagation": args["backpropagation"],
