@@ -195,6 +195,11 @@ def argument_parser():
         default=True,
         help="Use a reward function based on distance from goal")
     CLI.add_argument(
+        "--std_lr",
+        type=float,
+        default=0.005,
+        help="std optimizer learning rate")
+    CLI.add_argument(
         "--log_dists",
         type=strtobool,
         choices=[True, False],
@@ -341,6 +346,7 @@ def main():
             "init_std": log_std,
             "prv_std_qty": args["prv_std_qty"],
             "prv_std_weight": args["prv_std_weight"],
+            "std_lr": args["std_lr"]
         }
         args["tree_params"] = {
             "backpropagation": args["backpropagation"],
