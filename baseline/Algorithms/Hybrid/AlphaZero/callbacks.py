@@ -9,6 +9,7 @@ import numpy as np
 import logging
 from matplotlib.figure import figaspect
 from pandas import read_csv, Series
+import pickle
 
 from .azero_tree import AzeroTree
 from .utils import test_model
@@ -238,9 +239,9 @@ class TestOptimization:
                     else:
                         self.tree = self.tree_maker(self.env)
                     self.tree.set_brain(self.current_brain)
-                results = test_model(self.tree, self.current_brain.get_weights(), n_episodes=self.n_test)
+                results, logs = test_model(self.tree, self.current_brain.get_weights(), n_episodes=self.n_test)
             else:
-                results = self.sampler.collect(self.current_brain.get_weights(), eval=True, n_episodes=self.n_test)
+                results, logs = self.sampler.collect(self.current_brain.get_weights(), eval=True, n_episodes=self.n_test)
             for k in results[0].keys():
                 # cannot do the mean of list element
                 if not hasattr(results[0][k], '__len__'):
@@ -333,15 +334,18 @@ class TestModel:
                     else:
                         self.tree = self.tree_maker(self.env)
                     self.tree.set_brain(self.current_brain)
-                results = test_model(self.tree, self.current_brain.get_weights(), n_episodes=self.n_test)
+                results, logs = test_model(self.tree, self.current_brain.get_weights(), n_episodes=self.n_test)
             else:
-                results = self.sampler.collect(self.current_brain.get_weights(), eval=True, n_episodes=self.n_test)
+                results, logs = self.sampler.collect(self.current_brain.get_weights(), eval=True, n_episodes=self.n_test)
             for k in results[0].keys():
                 # cannot do the mean of list element
                 if not hasattr(results[0][k], '__len__'):
                     if isinstance(results[0][k], Number):
                         self.infos[k] = np.mean(list(d[k] for d in results))
-
+            if len(logs) > 0:
+                save_path = self.save_path + "/logs_" + str(self.n_calls) + ".pkl"
+                with open(save_path, 'wb') as outp:
+                    pickle.dump(logs, outp)
         self.n_calls += 1
         self.infos["t-testing"] = time() - t0
 

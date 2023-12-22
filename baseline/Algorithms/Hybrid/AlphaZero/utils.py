@@ -1,5 +1,4 @@
 from collections import deque
-
 import numpy as np
 from scipy.signal import lfilter
 
@@ -428,7 +427,13 @@ def test_model(training_tree, weights, n_episodes=1, seed=None):
     training_tree.set_brain_weights(weights)
     results = []
     env = training_tree.env
+    log_dists = training_tree.args["log_dists"]
+    logs = []
     for i in range(n_episodes):
+        current_states = []
+        current_actions = []
+        current_values = []
+        current_distributions = []
         training_tree.reset()
         done = False
         info = {"return": 0,
@@ -436,8 +441,14 @@ def test_model(training_tree, weights, n_episodes=1, seed=None):
         depth_amcts = training_tree.args["depth"]  # Non mi piace questa soluzione, ma va
         t = 0
         while not done:
+            current_states.append(training_tree.root.S["nn_input"])
             action, index = training_tree.get_best_action(depth_amcts)
             S_, reward, done, ep_info = env.step(action)
+            if log_dists and hasattr(env, "get_optimal_actions"):
+                actions, values = env.get_optimal_actions(env.get_S())
+                current_actions.append(actions)
+                current_values.append(values)
+                current_distributions.append((training_tree.root.Qs, training_tree.root.sigmas))
             training_tree.set_new_root(index, S_)
             t += 1
             info["length"] += 1
@@ -446,5 +457,9 @@ def test_model(training_tree, weights, n_episodes=1, seed=None):
                 info["solved"] = ep_info["solved"]
             if "distance" in ep_info:
                 info["distance"] = ep_info["distance"]
+        if log_dists:
+            Qs, sigmas = training_tree.brain.predict(np.asarray(current_states))
+            current_starting_distributions = [x for x in zip(Qs, sigmas)]
+            logs.append((current_starting_distributions, current_actions, current_values, current_distributions))
         results.append(info)
-    return results
+    return results, logs

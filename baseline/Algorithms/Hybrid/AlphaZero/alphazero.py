@@ -288,7 +288,7 @@ class Azero:
             experiences = run_episodes(self.tree_maker, self.env_maker, weights_to_use, n_episodes=episodes, tree=tree,
                                        HER_prob=self.HER_prob)  # seed=np.random.randint(1000000),
         else:
-            experiences = self.sampler.collect(weights_to_use, HER_prob=self.HER_prob, n_episodes=episodes)
+            experiences, _ = self.sampler.collect(weights_to_use, HER_prob=self.HER_prob, n_episodes=episodes)
         self.memory.add_batch(experiences)
 
         # Restore GPU allocation

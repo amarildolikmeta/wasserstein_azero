@@ -133,6 +133,12 @@ class BitFlip(gym.Env):
 
         return S
 
+    def get_optimal_actions(self, state):
+        s = state["nn_input"]
+        actions = np.where(s == -1)[0]
+        values = -1 * np.ones_like(actions) * (len(actions) - 2)
+        return actions, values
+
     def set_S(self, node):
 
         self.current_state = node.S["current_state"].copy()

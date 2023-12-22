@@ -30,11 +30,12 @@ def traj_segment_function(tree, env, weights, HER_prob, n_episodes, eval=False, 
     if n_episodes == 0:
         return deque()
     if eval:
-        memories = test_model(tree, weights, n_episodes)
+s        memories, logs = test_model(tree, weights, n_episodes)
     else:
         memories = run_episodes(mcts_maker=None, env_maker=env_maker, weights=weights, n_episodes=n_episodes,
                                 tree=tree, HER_prob=HER_prob)
-    return memories
+        logs = []
+    return memories, logs
 
 
 class Worker(Process):
@@ -110,8 +111,8 @@ class Worker(Process):
             self.event.clear()
             command, weights, n_episodes, HER_prob, eval = self.input.get()
             if command == 'collect':
-                samples = self.traj_segment_generator(self.tree, self.env, weights, n_episodes, HER_prob, eval)
-                self.output.put((os.getpid(), samples))
+                samples, logs = self.traj_segment_generator(self.tree, self.env, weights, n_episodes, HER_prob, eval)
+                self.output.put((os.getpid(), samples, logs))
             elif command == 'reset':
                 args = weights
                 make_env = n_episodes
@@ -182,10 +183,12 @@ class ParallelSampler(object):
         for e in self.events:
             e.set()
         sample_batches = []
+        log_batches = []
         for i in range(self.n_workers):
-            pid, samples = self.output_queue.get()
+            pid, samples, logs = self.output_queue.get()
             sample_batches.extend(samples)
-        return sample_batches
+            log_batches.extend(logs)
+        return sample_batches, log_batches
 
     def reset(self, args=None, make_env=None, make_tree=None):
         """

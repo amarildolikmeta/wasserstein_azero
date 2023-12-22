@@ -238,6 +238,12 @@ def argument_parser():
         default=False,
         help="true to place models in gpu")
     CLI.add_argument(
+        "--log_dists",
+        type=strtobool,
+        choices=[True, False],
+        default=False,
+        help="true to log distributions on the root")
+    CLI.add_argument(
         "--suffix",
         type=str,
         default="",
@@ -319,7 +325,7 @@ def main():
             "num_layers": args["num_layers"],
             "num_hidden": args["num_hidden"],
             "init_mean": mean,
-            "init_std": log_std,
+            "init_std": std,
             "prv_std_qty": args["prv_std_qty"],
             "prv_std_weight": args["prv_std_weight"],
             "std_lr": args["std_lr"]
