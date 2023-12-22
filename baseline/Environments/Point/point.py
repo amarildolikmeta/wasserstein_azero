@@ -107,9 +107,11 @@ class PointEnv(MujocoEnv, utils.EzPickle):
         if reward >= -2.:
             if not evaluate: self.done = True
             info["solved"] = True
+            self.solved = True
         else:
             if not evaluate: self.done = False
             info["solved"] = False
+            self.solved = False
         if not self.distance_reward:
             reward = -1
 
@@ -130,6 +132,7 @@ class PointEnv(MujocoEnv, utils.EzPickle):
             info = {}
             info["goal"] = self.goal
             info["done"] = True
+            info["solved"] = self.solved
             self.done = True
             return self.get_S(), 0, self.done, info
         self.do_simulation(action, self.frame_skip)
@@ -191,6 +194,7 @@ class PointEnv(MujocoEnv, utils.EzPickle):
         self.timestep = 0
         self.actions_sequence_index = []
         self.done = False
+        self.solved = False
         return self.get_S(), self.done
 
     def get_S(self):

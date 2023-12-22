@@ -111,7 +111,7 @@ class AzeroWassersteinTree(AzeroTree):
                         q = np.sum(node.Qs * counts)
                         sigma = np.sum(node.sigmas * counts)
                         result = (q, sigma)
-                        ret = result if not node.is_solved else (0, 0)
+                        ret = result if not node.is_terminal else (0, 0)
                 else:
                     if self.backpropagation == "optimistic":
                         values = node.Qs + self.standard_bound * node.sigmas
