@@ -30,7 +30,7 @@ def traj_segment_function(tree, env, weights, HER_prob, n_episodes, eval=False, 
     if n_episodes == 0:
         return deque()
     if eval:
-s        memories, logs = test_model(tree, weights, n_episodes)
+        memories, logs = test_model(tree, weights, n_episodes)
     else:
         memories = run_episodes(mcts_maker=None, env_maker=env_maker, weights=weights, n_episodes=n_episodes,
                                 tree=tree, HER_prob=HER_prob)
