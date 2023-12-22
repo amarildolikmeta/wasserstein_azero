@@ -194,6 +194,13 @@ def argument_parser():
         choices=[True, False],
         default=True,
         help="Use a reward function based on distance from goal")
+    CLI.add_argument(
+        "--log_dists",
+        type=strtobool,
+        choices=[True, False],
+        default=False,
+        help="true to log distributions on the root")
+
 
     CLI.add_argument("--pv_loss_ratio", nargs="?", type=float, default=1, help="ratio between policy and value loss")
     CLI.add_argument("--path_results", type=str, default="results/", help="directory to save results")
