@@ -73,7 +73,7 @@ class AzeroWassersteinBrain(nn.Module):
         self.std_layers = []
         self.value_layers = []
         self.init_std = init_std
-        self.init_log_std = np.log(init_std)
+        self.init_log_std = init_log_std = np.log(init_std)
         self.relu = nn.ReLU()
         self.selu = nn.SELU()
         self.softmax = nn.Softmax(dim=-1)
@@ -93,20 +93,19 @@ class AzeroWassersteinBrain(nn.Module):
         self.q = FlattenMlp(input_size=input_dim[0],
                             output_size=output_dim,
                             hidden_sizes=hidden_sizes,
-                            bias=init_mean,
                             positive=False,
                             train_bias=True)
         self.std = FlattenMlp(input_size=input_dim[0],
                             output_size=output_dim,
                             hidden_sizes=hidden_sizes,
-                            bias=init_std,
+                            bias=init_log_std,
                             positive=True,
                             train_bias=True)
 
         self.old_std = FlattenMlp(input_size=input_dim[0],
                                 output_size=output_dim,
                                 hidden_sizes=hidden_sizes,
-                                bias=init_std,
+                                bias=init_log_std,
                                 positive=True,
                                 train_bias=True)
 
