@@ -166,7 +166,10 @@ class PointEnv(MujocoEnv, utils.EzPickle):
 
     def reset_model(self):
         qpos = self.init_qpos + self.np_random.uniform(low=-.1, high=.1, size=self.model.nq)
-        qvel = self.init_qvel + self.np_random.randn(self.model.nv) * .1
+        try:
+            qvel = self.init_qvel + self.np_random.randn(self.model.nv) * .1
+        except:
+            qvel = self.init_qvel + self.np_random.standard_normal(self.model.nv) * .1
         if self.clip_state:
             qpos_clipped = np.clip(qpos, a_min=self.bounds[0], a_max=self.bounds[1])
             qvel_clipped = np.clip(qvel, a_min=self.vbounds[0], a_max=self.vbounds[1])
