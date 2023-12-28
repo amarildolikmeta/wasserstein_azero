@@ -142,6 +142,7 @@ class AzeroTree:
 
             child.S = S_
             child.is_terminal = done
+            child.done = done
             child.r = reward
             if "solved" in info:
                 any_solved_state += info["solved"]

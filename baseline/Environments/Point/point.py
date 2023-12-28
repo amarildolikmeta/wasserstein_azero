@@ -126,8 +126,6 @@ class PointEnv(MujocoEnv, utils.EzPickle):
         return np.array([x, y])
 
     def step(self, action):
-        if isinstance(action, int):
-            action = self.discrete_to_continuous_action(action)
         if self.timestep > self.max_len_episode or self.done:
             info = {}
             info["goal"] = self.goal
@@ -135,6 +133,8 @@ class PointEnv(MujocoEnv, utils.EzPickle):
             info["solved"] = self.solved
             self.done = True
             return self.get_S(), 0, self.done, info
+        if isinstance(action, int):
+            action = self.discrete_to_continuous_action(action)
         self.do_simulation(action, self.frame_skip)
         next_obs = self._get_obs(z=True)
 
@@ -220,7 +220,7 @@ class PointEnv(MujocoEnv, utils.EzPickle):
             qvel = np.clip(qvel, a_min=self.vbounds[0], a_max=self.vbounds[1])
         self._set_state(qpos, qvel)
         self.goal = node.S["goal"].copy()
-        self.done = node.is_terminal
+        self.done = node.done
         self.timestep = node.S["timestep"]
 
     def set_state(self, state):

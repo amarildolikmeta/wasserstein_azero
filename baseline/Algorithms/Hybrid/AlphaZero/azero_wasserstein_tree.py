@@ -71,6 +71,7 @@ class AzeroWassersteinTree(AzeroTree):
             S_, reward, done, info = self.env.step(child.action)
             child.S = S_
             child.is_terminal = done
+            child.done = done
             child.r = reward
             if "solved" in info:
                 any_solved_state += info["solved"]
@@ -86,7 +87,7 @@ class AzeroWassersteinTree(AzeroTree):
                 child.is_masked = True
             child.Qs = q
             child.sigmas = sigma
-            if child.is_solved:
+            if child.is_solved or child.is_terminal:
                 child.Qs *= 0
                 child.sigmas *= 0
 
@@ -123,7 +124,7 @@ class AzeroWassersteinTree(AzeroTree):
                         raise ValueError("Backpropagation not implemented")
                     best_arm = my_argmax(values)
                     result = (node.Qs[best_arm], node.sigmas[best_arm])
-                    ret = result if not node.is_solved else (0, 0)
+                    ret = result if not node.is_terminal else (0, 0)
             ret = (node.r + self.gamma * ret[0], self.gamma * ret[1])
             node.N += 1
             node.W += ret[0]
@@ -188,7 +189,10 @@ class AzeroWassersteinTree(AzeroTree):
         #                   self.dirichlet_noise_ratio * np.random.dirichlet([2 for _ in range(self.env.n_actions)])
 
         for _ in range(depth):
-            node = self.traverse(self.root)
+            try:
+                node = self.traverse(self.root)
+            except:
+                print("what Happened??")
             self.backpropagate(node)
             if not node.is_terminal: self.expand(node)
 
