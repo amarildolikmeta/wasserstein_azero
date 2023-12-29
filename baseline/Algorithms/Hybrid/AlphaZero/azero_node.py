@@ -26,6 +26,7 @@ class AzeroNode:
         self.P_no_dirichlet = []  # NN prediction, without additional exploration
         self.children = []
         self.is_terminal = not is_valid  # True if self is a terminal state (not every leafs are terminal)
+        self.done = self.is_terminal
         self.is_valid_action = is_valid  # False if self correspond to invalid action
         self.is_masked = False  # True if a brother-node is a solution
         self.is_solved = False  # True if self is a solved state (requires that env return "solved" key in info = env.step())
