@@ -228,6 +228,7 @@ class PointEnv(MujocoEnv, utils.EzPickle):
         self.timestep = node.S["timestep"]
 
     def set_state(self, state):
+        self.current_state = state["current_state"].copy()
         qpos = np.zeros(3)
         qvel = np.zeros(3)
         index = 3 if self.z_dim else 2
@@ -243,10 +244,38 @@ class PointEnv(MujocoEnv, utils.EzPickle):
 
 
 if __name__ == "__main__":
-    env = PointEnv(difficulty='easy', horizon=120, radius=1., goal=[25.0, 0.0])
+    problem_state = {
+        'current_state': np.array([8.56228667, 1.396712, 17.50119073, 3.32020388]),
+        'goal': [10.0, 0.0],
+        'nn_input': np.array([-0.31501707, 0.14399093, 0.35002381, 0.06640408]),
+        'done': False,
+        'timestep': 46}
+    env = PointEnv(difficulty='easy', horizon=120, radius=1., goal=[10.0, 0.0])
+    s, _ = env.reset()
+    for i in range(10):
+        env.step(np.random.choice(9))
+
+    init_s = env.get_S()
+    for i in range(10):
+        env.step(np.random.choice(9))
+    s = env.get_S()
+    for i in range(25):
+        actions = np.random.choice(9, 10)
+        for a in actions:
+            env.step(3)
+        env.set_state(init_s)
+        env.step(1)
+        env.set_state(s)
+        env.step(1)
+        print(env.get_S())
+        env.render()
+        input()
+        env.set_state(s)
+
     rets = []
     for j in range(100):
         ob, _ = env.reset()
+        env.set_state(problem_state)
         root = env.get_S()
         done = False
         t = 0
@@ -269,6 +298,10 @@ if __name__ == "__main__":
             #     env.set_S(node)
         print("Return:", ret)
         rets.append(ret)
+        input()
+        env.set_state(root)
+        env.render()
+        input()
     print("Mean Return:", np.mean(rets))
     print("Std Return:", np.std(rets))
     # env.render()

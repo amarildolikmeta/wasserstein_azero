@@ -259,10 +259,20 @@ def run_episodes(mcts_maker, env_maker, weights, n_episodes=1, tree=None, HER_pr
         if HER_type == "Posterior" or HER_type == "PosteriorFuture" \
                 or HER_type == "PosteriorFutureP" or HER_type == "PosteriorFutureAllP" \
                 or HER_type == "PosteriorFutureNoisyP": states_buffer = []
-        #t = 0
+        t = 0
         done = False
         while not done:
-            action, index = training_tree.get_best_action(depth_amcts, mode="train", **search_params)
+            current_state_before_search = env.get_S().copy()
+            try:
+                action, index = training_tree.get_best_action(depth_amcts, mode="train", **search_params)
+            except  Exception as e:
+                print("Error in timestep" + str(t) + " in run:")
+                print(training_tree.args)
+                print("State:")
+                print(current_state_before_search)
+                print("Exception:")
+                print(e)
+                exit()
             S = training_tree.root.S["nn_input"].copy()
             if HER_type == "Posterior" or HER_type == "PosteriorFuture" \
                     or HER_type == "PosteriorFutureP" or HER_type == "PosteriorFutureAllP" \
@@ -270,8 +280,9 @@ def run_episodes(mcts_maker, env_maker, weights, n_episodes=1, tree=None, HER_pr
                 states_buffer.append((training_tree.root.S, action))  # STD_HER
 
             P = training_tree.get_probabilities(HER_type)
-            S_, reward, done, info = env.step(action)
-            #t += 1
+            #env.set_state(current_state_before_search)
+            S_, reward, done, info = env.step(int(action))
+            t += 1
             if optimistic:
                 qs = training_tree.root.Qs
                 sigmas = training_tree.root.sigmas

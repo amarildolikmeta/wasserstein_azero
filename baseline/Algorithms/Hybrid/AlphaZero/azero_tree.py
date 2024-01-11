@@ -1,3 +1,4 @@
+import copy
 from math import sqrt
 from random import shuffle, sample
 
@@ -77,6 +78,8 @@ class AzeroTree:
         try:
             # if state was not explored yet
             self.root.children[action]
+            if not np.allclose(new_root_state["current_state"], self.root.children[action].S["current_state"]):
+                print("What is happening?????")
         except IndexError:
             self.expand(self.root)
 
@@ -86,7 +89,9 @@ class AzeroTree:
         self.max_depth = 0
         self.root.parent = None
         if self.root.S is None:
-            self.root.S = new_root_state
+            self.root.S = new_root_state.copy()
+        if not np.allclose(new_root_state["current_state"], self.root.S["current_state"]):
+            print("What is happening?????")
 
     def traverse(self, node):
 
@@ -140,7 +145,7 @@ class AzeroTree:
 
             S_, reward, done, info = self.env.step(child.action)
 
-            child.S = S_
+            child.S = S_.copy()
             child.is_terminal = done
             child.done = done
             child.r = reward
@@ -313,7 +318,6 @@ class AzeroTree:
         pitting: Add dirichlet noise
         train: Add dirichlet noise + noisy probabilities
         """
-
         if len(self.root.children) == 0:
             self.expand(self.root)
             P, v = self.brain.predict_one(self.root.S["nn_input"])
@@ -326,7 +330,6 @@ class AzeroTree:
                           self.dirichlet_noise_ratio * np.random.dirichlet([2 for _ in range(self.env.n_actions)])
 
         for _ in range(depth):
-
             node = self.traverse(self.root)
             self.backpropagate(node)
 

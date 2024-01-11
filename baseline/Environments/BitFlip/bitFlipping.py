@@ -140,7 +140,6 @@ class BitFlip(gym.Env):
         return actions, values
 
     def set_S(self, node):
-
         self.current_state = node.S["current_state"].copy()
         self.goal = node.S["goal"].copy()
         self.done = node.is_terminal

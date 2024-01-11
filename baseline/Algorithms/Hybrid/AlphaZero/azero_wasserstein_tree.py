@@ -1,3 +1,4 @@
+import copy
 from math import sqrt
 from random import shuffle
 
@@ -61,6 +62,8 @@ class AzeroWassersteinTree(AzeroTree):
             node:
         Returns:
         """
+        if node.done:
+            return
         self.env.set_S(node)
         is_valids = [self.env.is_valid_action(action) for action in range(self.env.n_actions)]
         node.children = [AzeroNode(node, action, is_valid=is_valid) for action, is_valid in enumerate(is_valids)]
@@ -69,7 +72,7 @@ class AzeroWassersteinTree(AzeroTree):
         for child in node.children:
             self.env.set_S(node)
             S_, reward, done, info = self.env.step(child.action)
-            child.S = S_
+            child.S = S_.copy()
             child.is_terminal = done
             child.done = done
             child.r = reward
@@ -175,8 +178,9 @@ class AzeroWassersteinTree(AzeroTree):
         Returns:
 
         """
-
         if len(self.root.children) == 0:
+            if self.root.done or self.root.is_terminal:
+                raise ValueError("Planning from a terminal state")
             self.expand(self.root)
             Qs, sigmas = self.brain.predict_one(self.root.S["nn_input"])
             self.root.Qs = Qs
