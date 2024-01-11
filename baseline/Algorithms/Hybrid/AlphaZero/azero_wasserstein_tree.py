@@ -191,10 +191,11 @@ class AzeroWassersteinTree(AzeroTree):
         for _ in range(depth):
             try:
                 node = self.traverse(self.root)
+                self.backpropagate(node)
+                if not node.is_terminal: self.expand(node)
             except:
                 print("what Happened??")
-            self.backpropagate(node)
-            if not node.is_terminal: self.expand(node)
+
 
 
         children_N = np.asarray([child.N for child in self.root.children])

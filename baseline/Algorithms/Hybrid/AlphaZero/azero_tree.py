@@ -90,7 +90,7 @@ class AzeroTree:
 
     def traverse(self, node):
 
-        while len(node.children) != 0:
+        while node.done is False and len(node.children) != 0:
             node = self.best_uct(node)
 
         return node
