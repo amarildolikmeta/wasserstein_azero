@@ -74,7 +74,7 @@ class AzeroTree:
         self.brain.set_weights(weights.copy())
 
     def set_new_root(self, action, new_root_state):
-
+        action = int(action)
         try:
             # if state was not explored yet
             self.root.children[action]
@@ -130,6 +130,8 @@ class AzeroTree:
         return None
 
     def expand(self, node):
+        if node.done:
+            return
         self.env.set_S(node)
 
         is_valids = [self.env.is_valid_action(action) for action in range(self.env.n_actions)]
@@ -319,6 +321,8 @@ class AzeroTree:
         train: Add dirichlet noise + noisy probabilities
         """
         if len(self.root.children) == 0:
+            if self.root.done or self.root.is_terminal:
+                raise ValueError("Planning from a terminal state")
             self.expand(self.root)
             P, v = self.brain.predict_one(self.root.S["nn_input"])
             self.root.P = P

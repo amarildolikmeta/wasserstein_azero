@@ -454,7 +454,7 @@ def test_model(training_tree, weights, n_episodes=1, seed=None):
         while not done:
             current_states.append(training_tree.root.S["nn_input"])
             action, index = training_tree.get_best_action(depth_amcts)
-            S_, reward, done, ep_info = env.step(action)
+            S_, reward, done, ep_info = env.step(int(action))
             if log_dists and hasattr(env, "get_optimal_actions"):
                 actions, values = env.get_optimal_actions(env.get_S())
                 current_actions.append(actions)
