@@ -41,7 +41,7 @@ def argument_parser():
         "--difficulty",
         type=str,
         default="double_L",
-        choices=["easy", "medium", "hard", "maze", "double_L"],
+        choices=["easier", "easy", "medium", "hard", "maze", "double_L"],
         help="configuration of the point environment")
     CLI.add_argument(
         "--depth",
@@ -192,7 +192,7 @@ def argument_parser():
         nargs="?",
         type=strtobool,
         choices=[True, False],
-        default=True,
+        default=False,
         help="Use a reward function based on distance from goal")
     CLI.add_argument(
         "--std_lr",

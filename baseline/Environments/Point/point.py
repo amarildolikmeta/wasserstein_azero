@@ -11,6 +11,7 @@ from gym import spaces
 
 diff_to_path = {
     'empty': 'point_empty.xml',
+    'easier': 'point.xml',
     'easy': 'point.xml',
     'medium': 'point_medium.xml',
     'hard': 'point_hard.xml',
@@ -32,6 +33,8 @@ class PointEnv(MujocoEnv, utils.EzPickle):
                  goal_dependent_state=False, reward_scale=True):
         if difficulty is None:
             difficulty = 'medium'
+        elif difficulty == 'easier':
+            goal = [10., 0.]
         model = diff_to_path[difficulty]
         self.max_state = max_state
         self.clip_state = clip_state
@@ -195,6 +198,7 @@ class PointEnv(MujocoEnv, utils.EzPickle):
         self.actions_sequence_index = []
         self.done = False
         self.solved = False
+        #  self.goal = (self.current_state[:2] + np.array([2, 2])).tolist()
         return self.get_S(), self.done
 
     def get_S(self):
@@ -239,22 +243,22 @@ class PointEnv(MujocoEnv, utils.EzPickle):
 
 
 if __name__ == "__main__":
-    env = PointEnv(difficulty='harder', horizon=120, radius=1.)
+    env = PointEnv(difficulty='easy', horizon=120, radius=1., goal=[25.0, 0.0])
     rets = []
     for j in range(100):
-        ob,_ = env.reset()
+        ob, _ = env.reset()
         root = env.get_S()
         done = False
         t = 0
         ret = 0
         while not done:
             env.render()
-            # command = input()
-            # try:
-            #     ac = int(command)
-            # except:
-            #     ac = np.random.choice(9)
-            ac = np.random.choice(9)
+            command = input()
+            try:
+                ac = int(command)
+            except:
+                ac = np.random.choice(9)
+            # ac = np.random.choice(9)
             _, r, done, _ = env.step(ac)
             t += 1
             ret += r
